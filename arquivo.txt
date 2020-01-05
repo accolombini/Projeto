@@ -11,4 +11,6 @@ git commit -m 'Uma mensagem clara do que foi feito desde a última alteração -
 git add . (adiciona todos os arquivos do diretório controlado na stage)
 git commit -am 'Uma mensagem clara do que foi feito desde a última alteração' (este comando realiza a adição na stage e realiza o commit de uma vez)
 É importante destacar que o comando git commit -am só é válido para arquivos que já estão senfo rastreados (não se aplica na primeira vez)
-git log (exibe o histórico de commits do(s) arquiv(s) controlado(s))
+git log (exibe o histórico de commits do(s) arquiv(s) controlado(s) --> Project history)
+Atenção quanto o log não couber em uma tela aparecerá o sinal de : para sair da tela de log é preciso preciosar a tecla "q"
+git checkout <código do commit exemplo: 071bb901c4cf20bb8b00f7c7497eee5f5d31b243> (nos poermite visualizar o arquivo naquele instante do snapshot)
