@@ -22,3 +22,4 @@ E para o primeiro commit não se esqueça de usar a cláusula -m, assim:
 git commit - m 'Comentário inicial do arquivo criado'
 Para subir os arquivos comitados para o GitHub usamos o comando:
 git push (este comando remete todos os arquivos comitados localmente para o repositório no GitHub)
+Atenção --> cuidado com o repositório criado no GitHub e clonado localmente, procure ter um repositório especifico - ok
