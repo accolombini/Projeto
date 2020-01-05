@@ -14,3 +14,4 @@ git commit -am 'Uma mensagem clara do que foi feito desde a última alteração'
 git log (exibe o histórico de commits do(s) arquiv(s) controlado(s) --> Project history)
 Atenção quanto o log não couber em uma tela aparecerá o sinal de : para sair da tela de log é preciso preciosar a tecla "q"
 git checkout <código do commit exemplo: 071bb901c4cf20bb8b00f7c7497eee5f5d31b243> (nos poermite visualizar o arquivo naquele instante do snapshot)
+git checkout master (para retornar para o master - arquivo atual ou último arquivo comitado)
