@@ -16,3 +16,9 @@ Atenção quanto o log não couber em uma tela aparecerá o sinal de : para sair
 git checkout <código do commit exemplo: 071bb901c4cf20bb8b00f7c7497eee5f5d31b243> (nos poermite visualizar o arquivo naquele instante do snapshot)
 git checkout master (para retornar para o master - arquivo atual ou último arquivo comitado)
 git clone (https://nome do repositório criado no github para onde deverão ser clonados todos os nossos arquivos --> Neste caso não há necessidade do git init)
+Atenção sempre que um novo arquivo for adicionado ao projeto ele precisa ser adicionado com o comando
+git add <nome do arquivo>
+E para o primeiro commit não se esqueça de usar a cláusula -m, assim:
+git commit - m 'Comentário inicial do arquivo criado'
+Para subir os arquivos comitados para o GitHub usamos o comando:
+git push (este comando remete todos os arquivos comitados localmente para o repositório no GitHub)
