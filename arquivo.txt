@@ -7,3 +7,7 @@ git config --global -l (lista todas as configurações)
 git config --global core.editor <nome do editor desejado - notepad, por exemplo> (define um editor de trabalho para o git)
 git status (status dos arquivos controlados pelo git)
 git add <nome do arquivo> (adiciona o arquino na stage para que o git passe a controlá-lo)
+git commit -m 'Uma mensagem clara do que foi feito desde a última alteração - procure ser claro aqui' <tira uma foto do arquivo naquele momento>
+git add . (adiciona todos os arquivos do diretório controlado na stage)
+git commit -am 'Uma mensagem clara do que foi feito desde a última alteração' (este comando realiza a adição na stage e realiza o commit de uma vez)
+É importante destacar que o comando git commit -am só é válido para arquivos que já estão senfo rastreados (não se aplica na primeira vez)
