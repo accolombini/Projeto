@@ -24,3 +24,33 @@ Para subir os arquivos comitados para o GitHub usamos o comando:
 git push (este comando remete todos os arquivos comitados localmente para o repositório no GitHub)
 Atenção --> cuidado com o repositório criado no GitHub e clonado localmente, procure ter um repositório especifico - ok
 git pull (este comando traz para o repositório local tudo o que foi criado remotamente)
+Vamos agora iniciar uma nova fase, neste momento trabalharemos com branchs e faremos merges das branches com a branch master
+Para criar uma nova branch usamos o seguinte comando:
+git branch <nome da branch> (simples assim)
+Para visualizar as branches do projeto usamos o seguinte comando:
+git branch (observe que neste caso não especificamos um mome --> nosso interesse é no retorno das branches dos projeto)
+Para assessarmos a nova branch e realizarmos nosso trabalho todo nela --> digo, a partir daqui estaremos fazendo commits na nova-branch
+git checkout <nome da branch> (este comando direciona nossas ações para a nova branch --> Nossos commits serão realizado aqui)
+Para retornar para a branch master usamos o comando:
+git checkout master (observe que estamos nomeando a git como master --> em palavras estamos acessando novamente a branch master)
+Podemos rastrear os commites em uma branch específica da mesma forma que fazíamos na branch master ou seja, usando o comando:
+git log  (você irá observar que todos os commites serão listados da branch master e da branch criada, lembra os commites são rastreados por históricos)
+Atenção se voltarmos para a branch master iremos observar que o commit realizado na branch assim como o documento alterado não existem na branch master.
+Vamos ver agora como realizar o merge de branches do tipo fast-forward (aquelas em que não foram realizados commits na branch master)
+Importante --> o merge é ralizado a partir da branch master (na branch master eu peço para realizar o merge). Isso é feito com o comando:
+git merge <nome da branch que desejo fazer o merge>
+Um comando interessante será visto a seguir, seu objeto é apresentar um minigráfico da estrutura de commit, veja o comando:
+git log --graph (este é um comando interessante quando se trabalha com várias branches)
+Após fazermos o mege de uma branch com a master, podemos excluir a branch antiga, para isso usamos o comando:
+git branch -d <nome da branch a ser excluída>
+Posso agora fazer uma consulta às branches usando o comando a seguir:
+git branch
+Vamos agora realizar branches merge recursive strategy (neste caso foram realizados commits nas duas branch --> na master e na branch criada)
+Podemos usar um comando um pouco mais interessante que nos permite criar um nova branch e entrar dentro dela, veja o comando a seguir:
+git checkout -b <nome da branch>
+Como poderemos term muita informação na tela e tornar o trabalho visulamente complexo, temos um comando que simplifica um pouco as coisas, veja a seguir:
+git log --graph --oneline (ele diz para o graph resumir tudo a uma única linha)
+Vamos agora trabalhar com conflitos nas branches --> isso ocorre quando alterações na master coincidem ou colidem com alterações feitas na branch.
+Posso usar uma opção para sinalizar quais commites quero que sejam incluídos na branch, observe:
+git commit -am 'mensagem' (observe o uso da flag -am ela inclui todas as alterações num único commit)
+Atenção --> a resolução do conflito é competência do usuário, logo sua palavra final irá definir o que fica o que sai e a ordem.
