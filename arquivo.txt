@@ -54,3 +54,10 @@ Vamos agora trabalhar com conflitos nas branches --> isso ocorre quando alteraç
 Posso usar uma opção para sinalizar quais commites quero que sejam incluídos na branch, observe:
 git commit -am 'mensagem' (observe o uso da flag -am ela inclui todas as alterações num único commit)
 Atenção --> a resolução do conflito é competência do usuário, logo sua palavra final irá definir o que fica o que sai e a ordem.
+Para que você insira seu projeto local na nuvem --> siga os passos a seguir:
+Crie um repositório no GitHub simples --> não adicone nada
+Na sua máquina use o comando:
+git push --set-upstream projeto master (projeto é o nome de seu repositírio)
+crie no git hub o arquivo readme.md
+Na sua máquina local faça:
+git pull (agora você esta sincroniado e atualizado)
