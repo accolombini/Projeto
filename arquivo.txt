@@ -96,3 +96,15 @@ do colaborador que deseja enviar a mensagem
 ASSINATURAS e ENCERRAMENTO DAS ISSUES
 No topo do lado direito no github há a opção Assignees onde é possível sinalizar quem saão as pessoas cadastradas para assinar 
 essa ISSUE --> essa ferramenta ajuda pessoas a acompanharem as ações realizadas numa ISSUE.
+ISSUES e MILESTONES --> Milestones são agregadores de ISSUES, em termos gerais, podemos dizer que os Milestones nos permitem agrupar
+uma série de ISSUES que estão relacionadas entre si.
+Para criar um Milestone, no github no ambiente de ISSUE, escolha a opção Milestones. No Milestones, definimos uma data de término 
+para a tratativa do problema. Isso faz com que o Git passe a gerenciar o cronograma para você.
+Uma vez criado o Miletsone, retornamos para as ISSUES criadas e selecionamos as ISSUES que devem ser incluídas neste Milestone.
+Feito isso, ao retornar para o ambiente de Milestone, nos será apresentado uma ferramenta visual para acompanharmos o que está 
+acontecendo com ass ISSUES.
+INTERESSANTE --> ao fazermos o commit para a solução de uma ISSUE, na egião de comentários, podemos usar a palavra "fixes" # <num ISSUE>
+para sinalizar que a demanda solicitada na ISSUE foi realizada.
+Na troca de mensagens no ambiente de ISSUES você pode usar emojis, para ativá-los basta digitar : que um menu pop up lhe pemite escolher um emoji 
+Atenção, uma pessoa externa pode encerrar uma ISSUE, principalmente tendo ele gerado a ISSUE.
+AGORA ATENÇÃO --> vamos trabalhar com GIT - CHECKOUT & RESET
