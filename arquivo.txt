@@ -61,3 +61,38 @@ git push --set-upstream projeto master (projeto é o nome de seu repositírio)
 crie no git hub o arquivo readme.md
 Na sua máquina local faça:
 git pull (agora você esta sincroniado e atualizado)
+Vamos falar agora da ferramenta ISSUES --> podemos usar esta ferramenta por vários motivos, são os mais relevantes:
+1-  Relatar o Rastreio de Bugs --> nesta ISSUES queremos relatar bugs no projeto e acompanhar a solução destes bugs.
+2- Sugestão de Ferramentas para o projeto
+As ISSUES nos permitem fazermos um histórico de todas as alterações e uso das ferramentas, em outras palavras
+conseguimos desta forma documentar passo a passo tudo o que foi feito para resolver bugs ou no desenvolvimento das novas ferramentas
+Criando e resolvendo ISSUES:
+1- No gitHub na guia do projeto que está trabalhando há um botão chamada ISSUES --> abre-se uma tela e nela você tem a possibilidade
+de definir o título de sua ISSUES (uma boa dica --> as ISSUES pode auxiliá-lo a fazer uma boa gestão do seu projeto)
+2- Cria-se a issue faz um clone no seu repositório local --> se for possível atenda de imediato a ISSUE e realize o commit
+3- Se o commit realizado resolveu a ISSUE documente isso no GITHUB e faça um breve Comentário.
+Criando branches
+Você pode optar, por exemplo, por criar uma nova branch para atender a ISSUE criada, desta forma, você evita alterar a branch master
+Nota: você ao realizar um commit para atender uma ISSUE específica após os comentários poderá acrescentar # <número da ISSUE>
+O git entenderá que o commit feito refere-se a uma ISSUE específica, no caso, (número da ISSUE)
+ATENÇÃO: após esse commit feito você deverá fazer um git push, correto? Pois é, isso não irá funcionar, pois o git entende que
+os commits devem ser direcionados para a branch master, o que não é o caso neste momento. Para resolver isso, use o comando:
+git push origin <branch destino>
+ISSUES COMO FERRAMENTA COLABORATIVA
+Observe que você pode desabilitar uma ISSUE, note que, por padrão, as ISSUES veêm ativadas, para desativá-las vá em
+Features e desmarque a guia ISSUES
+Num cenário colaboratívo, um colaborador também possui a autonomia para criar ISSUES e realizar solicitações sobre o projeto
+Para isso, este colaborador deve acessar a página do projeto e criar uma ISSUE (processo anteriormente visto)
+IMPORTANTE: se na área de comentário do commit for inserida a palavra "closes" seguida do id da ISSUE (# <NUM ISSUE)
+Quando a palavra closes seguida do identificador da ISSUE for utilizada, ao realizar o git push a ISSUE será encerrada
+Vamos agora ver como trabalhar com LABELS em ISSUES --> Para adicionar um LABEL, basta ir no github, selecionar a ISSUE
+e escolher a opção LABEL, observe que o github tráz alguns LABELS padronizados que poderá usar diretamente, mas você é 
+livre para criar os seus. Ao usar um LABEL você poderá fazer uma gestão visual do seu projeto através por exemplo das cores 
+utilizadas na definição do seu LABEL
+Outra prática importante é trabalhar com EMAILS E CITAÇÕES EM ISSUES
+O interessante é que ao escrever, alterar produzir na ISSUE é enviado um e-mail a todos os colaboradores com interesse na ISSUE
+em questão. O colaborador pode enviar uma mensagem para uma pessoa específica, para isso, basta usar o símbolo de @ e o nome
+do colaborador que deseja enviar a mensagem
+ASSINATURAS e ENCERRAMENTO DAS ISSUES
+No topo do lado direito no github há a opção Assignees onde é possível sinalizar quem saão as pessoas cadastradas para assinar 
+essa ISSUE --> essa ferramenta ajuda pessoas a acompanharem as ações realizadas numa ISSUE.
