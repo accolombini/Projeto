@@ -108,3 +108,42 @@ para sinalizar que a demanda solicitada na ISSUE foi realizada.
 Na troca de mensagens no ambiente de ISSUES você pode usar emojis, para ativá-los basta digitar : que um menu pop up lhe pemite escolher um emoji 
 Atenção, uma pessoa externa pode encerrar uma ISSUE, principalmente tendo ele gerado a ISSUE.
 AGORA ATENÇÃO --> vamos trabalhar com GIT - CHECKOUT & RESET
+AGORA VAMOS FALAR SOBRE --> CHECKOUT & RESET (Git e GitHub intermediário)
+Como podemos desfazer ações realizadas no Git e Github?
+Atenção --> estes comando vão modificar o Project History e isso é um problema, portanto, tome muito cuidado, principalmente se as alterações
+já tiverem sido publicadas no GitHub e tiverem sido compartilhadas.
+Interessante, antes de você colocar seu arquivo modificado na área de Stage (comando git add .) você pode facilmente alterar o que foi realizado,
+para isso devemos usar o comando <git checkout nome_do_arquivo> --> como num passe de mágica as alterações realizadas que não foram para a área de 
+stage serão removidas.
+Imagine se você foi muito rápido e adicionou as alteraões na stage (comando git add .). Neste caso, ainda assim você pode voltar atrás, mas deverá
+usar o comando <git reset head nome_do_arquivo> nós removemos tudo o que foi colocado na área de stage.
+Atenção --> ao usar o git reset o arquivo volta para o estado anterior a ser inserido na área de stage, sendo assim, ainda precisamos utilizar o 
+git checkout nome do arquivo para remover as alterações.
+Indo além --> imagine agora que chegamos ao ponto de realizarmos o commit. Ainda neste caso podemos voltar atrás, veja alguns comandos de apoio
+git log --decorate --oneline nos mostra onde está a HEAD (opção --decorate) e em uma linha (opção oneline)
+Para voltarmos atrás após realização de um ou mais commits usamos o comando <git reset head^>, onde ^indica o número de passos que queremos retornar,
+no caso head^ voltamos um passo de head, para head^^ voltamos dois passos e assim por diante.
+Imagine o caso onde queremos parar de rastrear algum arquivo, queremos dizer ao git --> não rastreie mais este arquivo. Neste caso, usamos
+O coamndo <git rm --cached a.txt>, mas atenção, o deixar de rastrear não elimina os rastros anteriores do arquivo, isto é,
+podemos ter acesso a todas as alterações do arquivo anteriores à sua mudança de status para não rastreável.
+Cuidado --> podemos, caso queiramos eliminar todos os rastros dos commits passados, eliminando nosso projeto. Para isso devemos usar
+o comando <git reset --hard codigo_do_commit que desevo voltar> no caso de queirer zerar seu projeto você deve voltar ao commit inicial
+AGORA VAMOS FALAR DE FORK
+Legenda --> Repositório principal (upstream)
+Legenda --> Repositório cópia (FORK)
+Legenda --> local (que está na sua máquina)
+Fork é um conceito que envolve as tecnologias Git GitHub que permite que você fação uma cópia (um clone) de uma repositório 
+público quaquer direto para seu repositório, isso permite que você experimente alterações no projeto, uma vez que você não tem acesso
+ao repositório que alguém criou. Outra aplicação do Fork é na colaboração de projetos (projetos de terceiros), através do ciclo do Fork
+é possível enviar alterações ou sugerir alterações.
+Atenção, uma vez realizado um Fork os projetos são ASSÍNCRONOS, isto é, alterações realizadas no projeto principal não refletem na cópia
+realizada por você, podemos dizer que as atualizações são independentes. No entanto, podemos querer manter nosso projeto atualizado
+(sincronizado) com as alterações feitas no principal, neste caso, devemos fazer uma cópia do nosso Repositório Cópia para nosso
+repositório local (clone).
+Uma vez no diretório local, você adiciona um link com o diretório principal --> você faz um add remote usando o seguinte comando
+<git remote add upstream https://endereço do repositório principal> (observe o uso nome padrão upstream)
+Para visualizarmos quantos diretórios remotos fazem parte do nosso fork, usamos o comando <git remote -v>, neste caso, teremos o 
+origin que aponto para nosso fork e o upstream que aponta para o diretório principal.
+Agora podemos atualizar nosso repositório fazendo <git pull upstream master> --> estamos fazendo uma atualização a partir do nosso
+diretório master (branch principal nosso diretório principal). 
+Feito isso --> usamos o comando <git push> para sincronizar nosso repositório com o repositório principal
