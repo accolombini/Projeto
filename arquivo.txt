@@ -210,3 +210,116 @@ Por fim vamos condensar vários commits em um único commit, para isso vamos usa
 <git rebase -i hash_do_commit_desejado>, novamente teremos o editor de texto e poderemos agora realizar as alterações
 Atenção, o commit que deseja unir aos demais deve receber a opção <s> os outros permancem com <pick>
 AGORA VAMOS TRABALHAR COM FORK WORKFLOW 
+Pré requisitos para um bom entendimento:
+--> Merge & Solução de conflitos
+--> Branches 
+--> Rebase & Soluçãp de conflitos
+--> Trabalhar com ISSUES
+O processo de trabalhar com colaboração se baseia no uso do FORK e do Pull Request
+Você faz um Pull Request toda vez que desejar que uma alteração que você realizou seja incormporada
+no projeto do terceiro. Em outras palavras podemos escrever:
+--> Pull Request
+--> Enviar alterações para serem incorporadas à um projeto
+--> Discussões sobre código
+--> Integrar código revisado ao projeto 
+Em palavras, o dono do projeto, pode receber suas sugestões avaliá-las e decidir se deve ou não incorporá-las
+a seu projeto original, trata-se de uma excelente ferramenta de colaboração
+COMO COMEÇA O FLUXO?
+--> Tudo começa com o repositório upstream.
+--> A partir do upstream fazemos o Fok dele --> criamos o remote
+--> A partir do remote fazemos o clone para o repositório local
+--> A partir desse momento podemos alterar o projeto que nós clonamos
+--> Feito as alterações fazemos o push do nosso repositório local para o nosso repositório remote
+--> A partir do nosso remote fazemos um solicitação de Pull request para o repositório upstream (Projeto Principal)
+--> Quando é feito um Pull Request, o dono do projeto upstream recebe a solicitação e a branch que você trabalhou as
+alterações que está sugerindo para o projeto.
+--> Olha que interessante, o dono do projeto pode soliciar alterações em sua proposta e você trabalhará na mesma branch
+e está será atualizada toda vez que você fizer um push que isso será atualizado no Pull request, dizemos que , o GitHub 
+esta rastreando a branch e não o Pull request.
+--> Se o dono do projeto upstream resolver integrar as alterações solicitadas em seu projeto elas farão parte do projeto principal
+assim como você gostaria que tivesse sido feito. Cabe a você fazer uma atualização do seu repositório Fork.
+VAMOS REVISAR O FLUXO!!!
+1- FORK
+2- git clone
+3- git checkout -b, git add, git commit
+4- git push
+5- Pull request
+git pull upstream, git push (necessário para sincronizar no caso de aceite do dono do repositório upstream)
+--> 1- Uma boa dica para se trabalhar com colaboração é dando uma olhada nas ISSUES e avaliando as questões que estão sendo trabalhadas!
+--> 2- Outra dica nunca use sua branch master para trabalhar nas alterações que deseja fazer um Pull request --> crie uma nova branch 
+isso evita conflitos, principalmente no caso termos várias pessoas trabalhando no projeto.
+--> 3- Ao comitar faça sempre referência à ISSUES que motivou seu trabalho, use a diretiva # número da ISSUE
+--> 4- Lembre que ao fazer o push deverá se lembrar do seguinte <git push origin nome_da_issue_que_gerou_trabalhos>
+--> 5- Por fim, no seu GitHub confira se seu repositório está pronto para merge <Able to merge>, para que não exitam conflitos. Normalmente
+donos de repositórios não vão se preocupar em tentar resolver problemas de repositório que foram criados por terceiros, por isso, certifique-se
+de que seu repositório esteja <able to merge>
+--> 6- Estando tudo ok, é hora de fazer o Pull request, você terá a opçãode escrever uma mensagem (dica use essa opção)
+--> 7- Feito isso, nossa branch é adicionada ao projeto principal e o dono do projeto tem acesso a nossa branch e todos os commits que realizarmos
+--> 8- A partir desse ponto o dono do projeto poderá integrar nossas solicitações ao seu projeto ou realizar algum pedido de alteração ou complemento
+--> 9- Neste momento, se o dono do repositório entender que está tudo ok, ele poderá fazer o <Merge pull request> integrando assim nossa branch ao 
+projeto principal
+--> 10- Uma coisa interessante é que após 9 se adicionarmos na seção de comentários a diretiva <closes #num_da_issue> a issue será encerrada
+TUDO MUITO LEGAL, MAS E OS CONFLITOS --> Vamos agora tratar de Pull Request Merge & conflitos
+Para se manter sincronizado é necessário que você vá ao seu diretório (na branch que está trabalhando) e utilize o comando 
+<git remote add upstream (endereço do diretório upstream)>, em seguida você deve ir para a branch master <git checkout master> e
+em seguida atualizar seu repositório com o comando <git pull upstream master>, note que queremos a branch master que está no repositório upstream
+IMPORTANTE --> com nosso diretório atualizado, devemos iniciar uma nova branch para realizarmos as novas alterações.
+--> No caso de não conseguirmos a mensagem de <Able to merge>, estamos diante de um conflito, neste caso, cabe a nós resolvermos o problema
+para que o dono do projeto upstream não tenha que se preocupar com isso.
+--> Para tratar de conflitos:
+--> 1- Retorno ao meu projeto
+--> 2- Vou para a branch que estou trabalhando o Pull request
+--> 3- Faço agora o pedido de atualização (dentro da branch que estou trabalhando --> não na minha master)
+--> 4- Para atualizar uso o comando <git pull upstream master>, observe que quero atualizar a branch master do upestream na minha branch de trabalho
+--> 5- Feito isso, vá para o arquivo que trabalhou e resolva o conflito
+--> 6- Resolvido o conflito devemos adicionar a stage <git add .> e em seguida realizar um commit
+--> 7- Agora devemos fazer um push da nossa branch para o respositório origin com o comando <git push origin nossa_barnch>, estamos neste momento
+fazendo um push para o meu repositório remoto (Fork) e como esse Fork esta atrealado ao repositório upstream através de um pull request isso
+nos garante que todas as alterações realizadas em nossa branch reflitam no repositório upstream.
+--> 8- Volte agora ao GitHub e poderá visualizar as alterações realizadas. Eliminados a situação de conflitos, estmoa prontos para recebermos o merge
+--> 9- Lembre que ao fazer o merge aproveite para fechar a ISSUE sob discussão com a diretiva <closes #num_da_issue>
+--> 10- Por fim, caso queira, você poderá raastrear todo histórico das ISSUES normalmente (mesmo elas estando fechadas)
+ATENÇÃO --> os passos acima foram feitos em cima de MERGE e como sabemos eles podem poluir um pouco nosso Project History o que pode 
+não ser interessante, ou até mesmo gerar um incômodo ao usuário dono do diretório upstream. Uma boa alternativa é o uso do REBASE!
+PULL REQUEST REBASE & CONFLITOS
+ATENÇÃO --> Antes de qualquer ação não se esqueça de sincronizar sua master e criar uma nova branch.
+--> 1- git checkout master
+--> 2- git pull upstream master (como sincronizamos nossa master)
+--> 3- git checkout -b <nome_da_issue> (criamos uma nova branch para os trabalharemos)
+--> 4- git log --oneline --grahp (é de bom tom sempre analisar a situação do nosso projeto)
+--> 5- Faz se a alteração no arquivo, adicona, faz o commit, faz o push e em seguida voltamos ao GitHub para fazermos o Pull request
+--> 6- Não se esqueça de avaliar se seu pedido de Pull request está pronto para receber um merge <Able to merge>
+--> 7- Verifique a existência ou não de conflitos
+--> 8- Na existência de problemas, devemos retornar ao Visual Code em nosso projeto
+--> 9- Atenção, não se esqueça se queremos usar o Rebase, não devemos fazê-lo em um diretório compartilhado, pois como já sabemos
+isso afeta o Project History, para solucionar isso, devemos:
+--> 10- Criar uma nova branch a partir da branch que estavamos trabalhando anteriormente <git checkout -b Nome_issue_v2>, mantemos
+o nome da ISSUE e acrescentamos v2 (versão 2)
+--> 11- Agora faremos o sincronismo com o upstream <git pull upstream master --rabase> (observe o uso da flag --rebase)
+ela é necessária para tratarmos do problema de conflito sem o uso de merges e utilizando a iteratividade do rebase.
+--> 12- Abra o arquivo conflituoso e trate do conflito manualmente.
+--> 13- Continuamos no nosso processo de rebase iterativo, para isso, adicionamos na stage <git add .> e em seguida fazemos o
+<git rebase --continue>, em outras palavras, estamos dizendo que queremos continuar no nosso processo de rebase
+--> 14- Podemos agora usar o comando <git log --oneline --graph> para analisarmos a situação
+--> 15- Fazemos agora um push da nossa nova branch com o comando <git push origin nome_da_branch>
+--> 16- Neste ponto devemos voltar ao GitHub encerrar nosso processo de Pull request e fazermos um novo Pull request 
+agora com a nova branch trabalhad com rebase e conflitos corrigidos. Para encerrar devo deixar uma mensagem, como por exemplo,
+"Estou ecerrado o pull request para realizar novos ajustes"
+--> 17- Devemos agora fazer um novo pedido de Pull request (lembre-se que para fazer isso precisamos estar no nosso repositório
+do GitHub). Feito isso é de bom tom e favorece o registro histórico, deixamos uma mensagem dizenso que este processo de 
+Pull request continua o processo inciado no pull request #num_do_Pull_Request
+--> 18- Embora não se deva usar, é bom saber que existem opções para fazer o merge do pull request, vale a pena conferir,
+existe por exemplo a opção de fazer o merge usando o rebase, mas isso, como você já sabe altera o Projetc History.
+--> 19- Observe que a partir do merge criado, podemos apagar a branch que foi criada para gerar as alterações de trabalho.
+Dentro do repositório do GitHub teremos a opção <Deletar a branch>
+FORK WORKFLOW - LIMPEZA
+Para isso devemos
+--> 1- Acessamos nosso repositório local
+--> 2- Devemos ir para a útlima branch criada
+--> 3- Usamos o comando git branch -v (para visualizarmos quantas branchs estão ativas)
+--> 4- Visualizadas as branchs, devemos excluí-las do repositório local e do repostitório remoto, para isso, usamos
+git branch -D nome_da_branch (a diretiva -D para excluir independente se ela foi incorporada na master ou não)
+devemos fazer isso para todas as branchs encontradas, mas lembre-se, você não pode excluir a branch que está trabalhando.
+--> 5- Para exluir a branch que estava trabalhando, faça um <git checkout master> e agpra sim faça <git branch -D nome_branch>
+--> 6- Para verificar se tudo esta ok localmente use <git branch -v>. Estando tudo ok, lembre-se, no GitHub ainda estamos com as branchs
+--> 7- Para apagar um branch do GitHub estando no diretório local, usamos <git push -d origin nome_da_branch>
