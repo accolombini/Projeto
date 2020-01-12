@@ -147,3 +147,66 @@ origin que aponto para nosso fork e o upstream que aponta para o diretório prin
 Agora podemos atualizar nosso repositório fazendo <git pull upstream master> --> estamos fazendo uma atualização a partir do nosso
 diretório master (branch principal nosso diretório principal). 
 Feito isso --> usamos o comando <git push> para sincronizar nosso repositório com o repositório principal
+VAMOS AGORA FALAR SOBRE REBASE vs MERGE --> com rebese conseguimos trabalhar tudo o que diz respeito ao Project History
+Modificar Project History
+Alterar a ordem de commits (podemos alterar a ordem de commits)
+Unir commits (podemos unir vários commits em um único)
+Modificar mensagem (podemos alterar uma mensagem que por algum motivo não reflita com clareza as alterações realizadas)
+IMPORTANTE --> commits não são apenas saves para estabelecer pontos de backup! e sim uma forma de manter um histórico 
+cronológico sobre o que aconteceu com nosso projeto, em palavras, commits permitem contar uma história! A história do projeto
+Tanto REBASE cquanto MERGE servem para integrar uma branch em outra, mas existem vantagens e desvantagens em usar o REBASE ou
+o MERGE, que em linhas gerais podem ser assim descritos:
+MERGE --> não altera (destrói) a linha do tempo de uma branch!
+MERGE --> pode acabar poluindo a linha do tempo de uma branch!
+REBASE --> permite manter um histórico limpo!
+CONTROLE DE BRANCH COM REBASE
+O controle de branch com REBASE é interessante nos casos em que estamos trabalhando numa branch muito longa e muitos commits
+estão aontecendo na branch master e na branch criada, o que resultara no commit de merge, opção que pode não ser interessante 
+por não agregar valor ao histórico do projeto. Se esse for o caso o RABASE é uma opção inteligente, pois o mesmo, cria uma área
+temporária deslocando os commits da branch de forma que ele fique sempre em condição de realizar uma MERGE do tidpo forward.
+Mas atenção, cuidado com REBASE em branches públicas, porque você pode destruir o histórico do seu projeto.
+Dica --> cuide bem do seu REBASE! Em outras palavras, nunca faça REBASE, quando você está compartilhando sua branch, ou quando
+ela já está pública no GitHub
+OBSERVAÇÃO --> quando fazemos um MERGE o ralizamos de dentro da barnch master (fazemos um merge da branc com a master),
+mas no caso do RABASE isso é feito dentro da branch que queremos alterar o histórico. No caso de alterar o histórico da branch
+em relação à master, devemos usar o comando <git rebase master>, este comando deve ser executado dentro da branch.
+Quando é feito o REBASE, todos os commits da master são adicionado à branch. A diferença é que quando voltarmos para a master
+e executarmos o MERGE a branch irá realizar um merge forward como desejado, assim, ao usarmos o comando <git log --grahp --oneline>
+observaremos que não teremos a árevore das branches, mas sim commits lineares, ou seja, tudo se passa como se todas as operações
+tivesses sido executadas na branch master.
+Resumindo --> MERGE simples
+Merge simples --> git checkout master (DEVE OCORRER DENTRO DA MASTER)
+git merge nova-branch
+Resumindo --> USO DO REBASE
+git chekout nova-branch (DEVE OCORRER DENTRO DA BRANCH PARALELA)
+git rebase master (TODOS OS COMMITS SÃO ALOCADOS NA BRANCH NOVA-BRANCH)
+git checkout master (VOLTE PARA A MASTER)
+git merge nova-branch (REALIZE O MERGE FORWARD COM A NOVA BRANCH)
+Este processo remove todos os commits de MERGE e deixa o histórico limpo 
+COMO NO MERGE TEMOS CONFLITOS NO REBASE TAMBÉM, como devemos resolver isso?
+Da mesma forma que acontece no MERGE é preciso resolver o conflito no REBASE. A 
+diferença agora é esse conflito é tratado de dentro da branch criada, ao invés da
+branch master como era o caso anteriormente
+Resolvido o conflito manualmente, devemos adicionar a solução na stage <git add .> e 
+realizar um novo commit, para isso, devemos usar o comando <git rebase --continue>, isso
+indica que queremos continuar com nosso processo de REBASE. Caso quiséssemos cancelar o 
+processo de REBASE, deveriámos usar o comando <git rebase --abort>, este comando aborta o 
+processo de REBASE 
+VAMOS VER AGORA O REBASE ITERATIVO 
+Atenção --> neste momento estaremos alterando o Projeto History, sendo assim, só faça nas 
+branch que não foram compartilhadas, pois estamos alterando o Projeto History
+Vamos começar alterando a mensagem de um commit, para isso, usamos o comando 
+<git rebase -i hash_do_commit_desejado>. Este comando irá abrir o bloco de notas com todos os commits
+já realizados (a partir da árvore de commit tendo como referência o commit pai assinalado no comando git rebase -i), 
+o commit que desejar alterar a mensagem, basta subistituir o "pick" pelo "r" de reward
+Quando eu salvar esse arquivo (no bloco de notas) cada altareção encontratada será solicitado uma ação 
+iterativa para realizar a mudança desejada. Neste momento, será aberta uma janela do bloco de notas 
+solicitando a alteração, faça  a alteração desejada e salve novamente o arquivo.
+Para alterar a ordem de execução de commits, basta usar o comando <git rebase hash_do_commit_desejado> e em
+seguida o comando <get rebase -i hash_do_commit_desejado>. Este comando irá abrir o bloco de notas e lhe
+permitirá alterar a ordem de execução dos commits, simplesmente movendo o commit para a posição desejada e
+salvando o arquivo do bloco de notas.
+Por fim vamos condensar vários commits em um único commit, para isso vamos usar o comando --> SQUASH <s> no bloco de Notas
+<git rebase -i hash_do_commit_desejado>, novamente teremos o editor de texto e poderemos agora realizar as alterações
+Atenção, o commit que deseja unir aos demais deve receber a opção <s> os outros permancem com <pick>
+AGORA VAMOS TRABALHAR COM FORK WORKFLOW
