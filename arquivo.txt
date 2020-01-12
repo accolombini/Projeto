@@ -209,4 +209,4 @@ salvando o arquivo do bloco de notas.
 Por fim vamos condensar vários commits em um único commit, para isso vamos usar o comando --> SQUASH <s> no bloco de Notas
 <git rebase -i hash_do_commit_desejado>, novamente teremos o editor de texto e poderemos agora realizar as alterações
 Atenção, o commit que deseja unir aos demais deve receber a opção <s> os outros permancem com <pick>
-AGORA VAMOS TRABALHAR COM FORK WORKFLOW
+AGORA VAMOS TRABALHAR COM FORK WORKFLOW 
