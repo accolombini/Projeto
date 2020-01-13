@@ -323,3 +323,100 @@ devemos fazer isso para todas as branchs encontradas, mas lembre-se, você não 
 --> 5- Para exluir a branch que estava trabalhando, faça um <git checkout master> e agpra sim faça <git branch -D nome_branch>
 --> 6- Para verificar se tudo esta ok localmente use <git branch -v>. Estando tudo ok, lembre-se, no GitHub ainda estamos com as branchs
 --> 7- Para apagar um branch do GitHub estando no diretório local, usamos <git push -d origin nome_da_branch>
+IMPORTANTE --> CONCEITOS DO GITHUB WORKFLOW
+Alguns pré requisitos importantes:
+--> Merge & Conflitos
+--> Branches 
+--> Rebase 
+--> ISSUES
+--> Pull Request
+Fica ligado, GitHub Workflow não é Fork Workflow, ok.
+Relembrando, no Fork Workflow cada colaborador deve fazer o clone (faz sua própria cópia de repositório), em seguida 
+cada colaborador deve fazer o clone do seu repositório remoto para sua máquina local e depois submeter com o push para seu 
+próprio repositório remoto (seu próprio Fork), a partir do seu Fork, cada desenvolvedor submete por request para o repositório central
+e uma vez aprovado se integra ao repositório central, devendo se manter sincronizado o tempo tempo seu Fork com o repositório central.
+Um ponto complexo desse processo é que quando cresce o número de colaboradores e cada colaborador precisando acompanhar o Fork dos demais 
+essa integração acaba sendo muito complexa.
+--> GitHub Workflow é o fluxo de trabalho simplificado facilitando cada desenvolvedor a entender o trabalho que cada um está realizando. 
+Neste caso, cada desenvolvedor/colaborador pode fazer o clone direto do repositório central (upstream) não precisando do intermedifário 
+que é o seu próprio Fork, desta forma, qualquer alteração feita por um colaborador e submetida ao upstream por push estará disponível a 
+todos os demais no momento que ele fizer um pull. Como serão muito os commits, há uma estratégia para simplificar esse trabalho, essa
+estratégia recebe o o nome de FEATURE BRANCH STRATEGY --> Nesta estratégia para cada pedaço de uma aplicação que estiver trabalhando
+deverá criar uma branch separada da master, deverão haver muitas branchs ocorrendo em paralelo. O legal disso é que você poderá fazer 
+N commits na branch que desenvolveu assim como todos os colaboradores que estiverem trabalhando no seu projeto poderão commitar na mesma
+branch. Quando a branch estiver pronta para se integrar com a master é feito um Pull Request da mesma forma que era feito anteriormente.
+REVISANDO O FLUXO GITHUB WORKFLOW
+-->  git clone do repositório central (upstream) (faz um clone do repositório central)
+--> git checkout -b, git add, git commit (trabalhando na sua própria branch)
+--> git push (sobe para github)
+--> Pull request (pull request sendo aceito ele irá se integrar a master)
+--> git pull (para se manter atualizado e sincronizado)
+GITHUB WORKFLOW --> FLUXO BÁSICO
+--> 1- Faça um clone do repositório upstream
+--> 2- Crie uma nova branch
+--> 3- Faça as alterações desejadas
+--> 4- Adicione na stage
+--> 5- Faça o commit
+--> 6- Feito tudo isso estamos prontos para colaborar faça um <git push origin nome_da_branch>
+--> 7- É importante neste momento observar que nós não temos permissão para escrever neste repositório, pois se trata de um 
+repositírio privado
+--> 8- Para resolver isso, devemos acessar o repositório upstream e atribuir permissão para que o colaborador possa escrever 
+no repositório. Para isso, é preciso se logar como dono do repositório e na opção SETTINGS fazer as devidas alterações.
+--> 9- Em settings há uma guia COLLABORATORS é só entrar nesta guia e procurar pelo colaborador e lhe atribuir permissão.
+Feito isso, o colaborar receberá um e-mail dizendo que ele tem permissão para colaborar com seu projeto. Esta mensagem
+precisa ser aceita, para só então fazer parte do processo.
+--> 10- A partir daí podemos fazer push <git push origin nome_da_branch>
+--> 11- O próximo passo é realizar o Pull request
+--> 12- Observe que neste caso o próprio colaborador poderá fazer o Merge do seu Pull request (o que não é uma opção
+interessante). Sabendo disso, o próprio GitHub tem algo para resolver esse problema, embora você possa seguir fazendo
+neste momento o Merge que você próprio gerou. A partir do Merge, teremos nossas alterações incormporadas na branch
+master.
+--> 13- Para fazermos um sincronismo, devemos fazer um <git chekout master> ir para nossa master e realizarmos o 
+comando <git pull> que trará todas as atualizações para nossa máquina.
+GITHUB WORKFLOW --> RESTRIÇÃO DE ACESSO 
+Para controlar o acesso ao repositório upstream e evitar que aconteça algo como o demonstrado acima, o gitHub permite que
+o dono do repositório upstream, na opção de Settings, na guia Branches defina restrições de controle e acesso.
+--> Entrando em branches existe a opção Protected branches --> nesta opção há várias restrições que podem ser empregadas
+para proteger e garantir a integridade de seu projeto.
+GITHUB WORKFLOW PROCESSO DE REVIEW
+--> 1- Voltamos nossa master ao estágio anterior com o comando git reset --hard head^ (isso se deve ao fato de tentarmos
+realizar um push no repositório upstream e nos deparamos com restrições de acesso). Neste caso, faz-se necessário voltamos
+atrás em nosso repositório para podermos seguir por outro caminho e solicitar o Pull request 
+--> 2- Cria-se uma nova branch para tratar a demanda <git chekout -b nome_da_branch>
+--> 3- Passos normais: adiciona a stage, faz-se o commit em seguida o push <git push origin nome_da_branch>
+--> 4- Voltamos ao projeto e fazermos o pedido do Pull request 
+--> 5- Note que agora teremos uma mensagem relativo ao nível de restrição que foi estipulado pelo dono do repositório
+upstream 
+--> 6- O dono do upstream terá em seu ambiente GitHub ferramentas para tratar da demanda, digo da restrição criada.
+--> 7- Outra forma de estabelecer comunicação é clicando sobre o commit que gerou a solicitação de Pull request e fazer
+os comentários no próprio texto/código com o sinal de (+)
+--> 8- Por último há a opção de solicitar a revisão de código que fica localizada no canto superior direito do 
+quadro de Review required há três opções, são elas: Comentário; Aprovar; Solicitar mudanças.
+--> 9- Quando aprovada as alterações, o Merge estará disponível ao dono do upstream e ao dono da solicitação 
+GITHUB WORKFLOW CONFLITOS E REBASE --> conflitos sempre os conflitos é preciso conviver com eles
+Quando temos que trabalhar um branch específica, podemos usar o comando <git branch -a> para visualizarmos
+as branchs que temos acesso. Nesta opção visualizaremos inclusive as branchs remotas.
+--> Neste caso, quando você cria uma branch para tratar do assunto com o mesmo nome da branch remota, o 
+github é inteligente o bastante para fazer a amarração e criar um Track (rastrear)
+--> git checkout nome_da_branch_remota
+--> Agora estamos na branch remota e podemos ver isso com o comando <git log --oneline>
+--> Neste ponto você pode realizar a colaboração, fazer o commit com a opção am (adição e commit)
+--> Observe que no upstream que faremos usaremos a opção -u (upstream --> repositório principal) <git push -u origin nome_da_branch>
+--> Como outras pessoas podem contribuir para o mesmo evento pode acontecer de encontrarmos um conflito
+--> Para tratar esse tipo de conflito, recomenda-se o uso do Rebase
+--> Voltamos ao nosso usuário e realizamos um <git pull --rebase>. Esse comando irá gerar um conflito e abrirá a opção para que faça
+os devidos ajustes.
+--> Feito isso, salve a correção, adicione ao stage e continue com o commit <git add. && git rebase --continue>
+--> Podemos verificar como ficou fazendo <git log --oneline>
+--> Agora que temos o rebase realizado podemos voltar ao nosso push com <git push>
+--> Para finalizar o processo devemos voltar ao GitHub e realizar o Merge encerrando assim o processo
+UMA NOVA BRANCH SURGE NO LUGAR DA MASTER --> Alteração na branch principal
+--> Cuidados com a Branch Master
+--> Pode ser que algum usuário opte pela criação de uma branch deploy como uma tentativa de proteger a Master 
+--> A Branch deploy, quando existente, faz parte do repositório upstream!
+--> Existe uma opção no entanto, que faz com que a Master não seja mais o alvo do Pull request, para fazer isso siga os passos:
+--> 1- No repositório upstream
+--> 2- Vá em Settins e escolha a opção Branches
+--> 3- Na opção branches no Default branch você poderá definir qual a branch será considerada branch Default
+--> 4- Feito isso, sempre que forem fazer um Pull Request a branch que aparecerá como opção não será mais a Master 
+e sim a branch seliconada na opção Settings.
