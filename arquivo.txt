@@ -420,3 +420,67 @@ UMA NOVA BRANCH SURGE NO LUGAR DA MASTER --> Alteração na branch principal
 --> 3- Na opção branches no Default branch você poderá definir qual a branch será considerada branch Default
 --> 4- Feito isso, sempre que forem fazer um Pull Request a branch que aparecerá como opção não será mais a Master 
 e sim a branch seliconada na opção Settings.
+GIT STASH --> Preciso mesmo desse comando?
+Trata-se de um dos comandos mais importantes do GIT --> podereso quando se trabalha com capítulos
+Pense no contexto seguinte: Você esta desenvovendo seu trabalho e já caminhou bastante, só que neste momento
+você preceisa parar e trabalhar alguma documentação ou resolver algum bug, mas você não quer perder tudo o que já produziu
+--> 1- Crie uma nova branch para tratar dessas pendências dê um nome sugestivo como (wip) trabalho em progresso
+--> 2- Faça o commit de todo seu trabalho dentro dessa branch (tudo o que vinha trabalhando e que estava salvo e adicionado na stage)
+--> 3- Volte para a master <git checkout master>
+--> 4- Resolvido os problemas que motivaram esse desvio no fluxo do trabalho, faça um commit ainda na master
+--> 5- Retorne a branch criada anteriormente <git checkout wip>
+--> 6- Uma vez na branch devemos fazer um reset <git reset head^>, feito isso volte para a master
+--> 7- <git checkout master> adicione os arquivos na stage <git add .>
+ATENÇÃO --> veja como o processo é desgastante. Para isso existe o STASH 
+O STASH permite pegar todo trabalho que coloquei na stage e colocar numa área temporária, assim quando eu quiser
+removo essa área temporária e trago de volta o que estava na STAGE para o fluxo de trabalho normal.
+Mais do que isso, o STASH permite que você trabalhe com uma pilha, na qual você vai empilhando vários instantes do seu trabalho
+e num segundo momento você desmonta essa pilha conforme sua necessidade. Então vamos a ele:
+--> 1- Primeiramente lembre-se estamos trabalhando com arquivos que foram colocados na stage, mas ainda não foram comitados
+--> 2- Use o comando <git stash>
+--> 3- Sem sair da minha branch realizo os trabalhos que preciso, faço os commits que forem necessários, enfim tudo o que for preciso
+--> 4- Em seguida traga de volta o que foi colocado na pilha com o STASH
+--> 5- Use o comando <git stash apply>
+--> 6- A partir daí podemos seguir o fluxo normal fazendo o <git add .> e realizando o commit
+STASH --> RESOLVENDO PROBLEMAS DE CONFLITOS, MENSAGENS
+Mensagens e resolução de conflitos são duas ferramentas do STASH com nos ajudam a fazer uma boa gestão do nosso Projeto
+--> 1- Usamos o comando <git stash save 'Passamos uma mensagem sugestiva -- Aleração no capítulo 2'>
+--> 2- Para visualizarmos nossa pilha de STASH usanos o comando <git stash list>. Observe que a mensagem que digitamos irá 
+substituir a mensagem padrão
+--> 3- Podemos visualizar o que realizamos de trabalho usando o comando <git stash show --patch>
+--> 4- Para trazer de volta da STASH, usamos o seguinte comando <git stash pop>
+--> 5- No momento de trazer de volta do STASH houver um conflito o Git nos alerta e solicita que resolvamos o conflito
+--> 6- Usando o comando <git checkou nome_do_arq_conflito> voltamos ao estágio anterior e podemos resolver o problema
+--> 7- Uma vez resolvido o problema podemos executar <git stash pop> e tudo estará ok
+--> 8- A partir dos conflitos resolvido segue se o fluxo como se não tivessem ocorrido conflitos
+STASH --> KEEP INDEX --> neste cenário temos alterações que adicionamos na stage (queremos que sejam comitadas) e temos
+alterações que queremos preservar mas ainda não enviamos para a área de stage
+--> 1- Para avaliarmos como está nosso projeto usamos o comando <git status>
+--> 2- Tanto os arquivos que estão na área de stage como os que foram modificados vão para a área de STASH,
+pois ambos são rastreados 
+--> 3- Quando queremos passar para a área de STASH apenas os arquivos que não estão na área de stage usamos o 
+comando STASH com a flag keep index, veja <git stash --keep-index>
+--> 4- Se usarmos o comando <git status> poderemos visualizar que o que estava na área de stage continua na área
+de stage e o que ainda não havia sido adiconado na stage não mais se encontra na branch
+--> 5- Agora você pode fazer o commit da alteração e trazer de volta da stage <git stash pop>
+--> 6- Para encerrar o fluxo de trabalho podemos fazer um <git commit -am 'fianlizando os trabalhos'>
+STASH ANTES DE PULL --> stash para salvar o pull
+Muito importante quando estamos em cenários de conflito ao fazer um <git pull>, por exemplo,
+neste caso, a dica é faça um STASH das alterações realizadas, fazer o <git pull> normalmente e quando eu
+puder o quiser trago de volta o que foi colocado na pilha de STASH e resolvo os problemas de conflito.
+--> 7- Neste caso ao usar o comando <git stash pop> o conflito vem à tona e você tem a oportunidade de tratá-lo
+--> 8- Uma vez resolvido os conflitos realiza-se a adição na stage e o commit, na sequência você está pronto para
+enviar sua contribuição para o repositório upstream
+STASH --> LIST, SHOW, POP, DROP, UNTRACKED
+--> 1- O comando <git stash list> exibe todos os arquivos que estão na área de stash (a pilha stash)
+--> 2- Importante, quando você traz de volta algum arquivo que foi colocado na área de stash você NÃO o remove da pilha.
+--> 3- Para você remover algum arquivo na pilha stash, basta copiar o código do stash, algo como <stash@{22}> e usar
+o comando <git stash drop código_do_stash>
+--> 4- Você tem a opção de realizar as duas ações ao mesmo tempo, buscar da pilha e remover da pilha, para isso usamos
+o comando <git stash pop> (tráz de volta e remove da pilha)
+--> 5- O comando <git stash show> exibe o que vou modificado no meu último stash
+--> 6- Caso queira ver exatamente o que foram as alterações use o comando <git stash show --patch>
+--> 7- Se quisermos ver todas as alterações na pilha, usamos o comando <git stash list --stat>
+--> 8- Atenção arquivos com a opção U (UNTRACKED) não podem ser colocados na pilha stash, mas fique ligado
+caso queira incluir os arquivos com opção U, basta você adiconar a opção <git stash -u>, com a opção
+-u o git entende que você está querendo incluir os arquivos que não estão rastreados na sua ára de stash
